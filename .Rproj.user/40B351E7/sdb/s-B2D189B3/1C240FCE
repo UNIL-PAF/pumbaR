@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "# Load data from MQ and remove contaminants\n\nint_column_pattern <- \"Intensity\\\\.H\\\\.\"\n\n\n#' Load and filter MaxQuant proteinGroups.txt\n#'\n#' Load the results and remove contaminants.\n#'\n#' @param proteinGroups_path Path to proteinGroups.txt\n#' @examples\n#' proteinGroups_path <- \"/Users/admin/Work/PAF/projects/SliceSILAC/latest/data/Conde_9508/proteinGroups.txt\"\n#' pg <- load_MQ(proteinGroups_path)\n#' @export\nload_MQ <- function(proteinGroups_path){\n\n  # read proteinGroups.txt\n  pg <- read.table(proteinGroups_path, quote=\"\\\"\", row.names=NULL,\n             header=TRUE, sep=\"\\t\", fill=TRUE, na.strings=c(\"Non Num\\303\\251rique\"))\n\n  # remove contaminants and keep only columns of interest\n  is_contaminant <- PAFcontaminants::contaminants_MQ(pg)\n  keep_columns_names <- c(\"Majority.protein.IDs\", \"Gene.names\", \"Fasta.headers\", \"Peptides\", \"Score\", \"Only.identified.by.site\",\n                          \"Reverse\", \"Potential.contaminant\", \"id\", \"Peptide.IDs\", \"Mol..weight..kDa.\")\n  keep_columns <- colnames(pg) %in% keep_columns_names\n  keep_columns[grep(\"Intensity\\\\.H\\\\.\", colnames(pg))] <- TRUE\n  pg_flt <- pg[! is_contaminant, keep_columns]\n\n  pg_flt\n}\n\n#' Get intensities\n#'\n#' Extract the Intensity.H values and put slice numbers as the column names.\n#'\n#' @param pg ProteinGroups data.frame.\n#' @examples\n#' proteinGroups_path <- \"/Users/admin/Work/PAF/projects/SliceSILAC/latest/data/Conde_9508/proteinGroups.txt\"\n#' pg <- load_MQ(proteinGroups_path)\n#' ints <- get_intensities(pg)\nget_intensities <- function(pg){\n  # we extract the Intensity.H columns\n  col_ids <- grep(int_column_pattern, colnames(pg))\n  col_names <- colnames(pg)[col_ids]\n  slice_nrs <- get_slice_numbers(col_names)\n\n  # create a data.frame with the intensities\n  res <- pg[, col_ids]\n  colnames(res) <- slice_nrs\n  res\n}\n\n#' Get the slice numbers\n#'\n#' Extract the slice numbers from the column names\n#'\n#' @param col_names Column names.\nget_slice_numbers <- function(col_names){\n  col_names_flt <- grep(int_column_pattern, col_names, value=TRUE)\n  match_pattern <- \"Intensity[\\\\.|A-Z|a-z]+\"\n  as.numeric(sub(match_pattern, \"\", col_names_flt, perl=TRUE))\n}\n\n\n\n\n",
+    "created" : 1523976558017.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2316005067",
+    "id" : "1C240FCE",
+    "lastKnownWriteTime" : 1526392459,
+    "last_content_update" : 1526392459443,
+    "path" : "~/Work/PAF/projects/pumba/code/pumbaR/R/load-and-filter.R",
+    "project_path" : "R/load-and-filter.R",
+    "properties" : {
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

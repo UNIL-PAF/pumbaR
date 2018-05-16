@@ -1,0 +1,20 @@
+{
+    "collab_server" : "",
+    "contents" : "# Plot functions\n\n#' plot_MQ\n#'\n#' plot the intensities\n#'\n#' @param pg ProteinGroups data.frame.\n#' @examples\n#' proteinGroups_path <- \"/Users/admin/Work/PAF/projects/SliceSILAC/latest/data/Conde_9508/proteinGroups.txt\"\n#' proteinGroups_path <- \"tests/testthat/Conde_9508_sub.txt\"\n#' pg <- load_MQ(proteinGroups_path)\n#' print(plot_MQ(pg))\nplot_MQ <- function(pg){\n\n  # get the intensities from the proteinGroups\n  ints <- get_intensities(pg)\n  ints.weight <- cbind(ints, mol.weight = log10(pg$Mol..weight..kDa.))\n  ints.long <- reshape2::melt(ints.weight, id=\"mol.weight\")\n  ints.flt <- ints.long[ints.long$value > 0 & ! is.na(ints.long$value),]\n  max.ints <- max(ints.flt$value)\n  min.ints <- min(ints.flt$value)\n\n\n  # create a ggplot\n  p <- ggplot2::ggplot(data=ints.flt, ggplot2::aes(x=variable, y=mol.weight, colour=value))\n  p <- p  + ggplot2::geom_point(position=\"jitter\", alpha=0.5)\n  p <- p  + ggplot2::scale_colour_gradient2(\"Intensity (log)\", trans=\"log\", limits=c(min.ints, max.ints))\n  p <- p  + ggplot2::xlab(\"slice number\") + ggplot2::ylab(\"theoretical MW (log)\")\n  #p <- p  + coord_cartesian(xlim = c(1, nr.slices))\n  #+ scale_y_continuous(limits=xlim.mass)\n\n  p\n}\n\n#' plot_fit\n#'\n#' plot the MaxQuant data with the fitting curve\n#'\n#' @param pg ProteinGroups data.frame.\n#' @param mass_fit Mass-slice fitting function\nplot_fit <- function(pg, mass_fit){\n\n  # get the intensities from the proteinGroups\n  ints <- get_intensities(pg)\n  ints.weight <- cbind(ints, mol.weight = log10(pg$Mol..weight..kDa.))\n  ints.long <- reshape2::melt(ints.weight, id=\"mol.weight\")\n  ints.flt <- ints.long[ints.long$value > 0 & ! is.na(ints.long$value),]\n  max.ints <- max(ints.flt$value)\n  min.ints <- min(ints.flt$value)\n\n  # the data to show the fitting curve\n  plot_fit_function <- function(x){\n    y <- predict(mass_fit, data.frame(variable=x))\n    return(y[[1]])\n  }\n\n  # prepare the data for the fitting function\n  nr_slices <- ncol(ints)\n  plot_fit_data <- data.frame(slice=1:nr_slices, mass=unlist(lapply(1:nr_slices, plot_fit_function)))\n\n  # create a ggplot\n  p <- ggplot2::ggplot(data=ints.flt, ggplot2::aes(x=variable, y=mol.weight, colour=value))\n  p <- p  + ggplot2::geom_point(position=\"jitter\", alpha=0.5)\n  p <- p  + ggplot2::scale_colour_gradient2(\"Intensity (log)\", trans=\"log\", limits=c(min.ints, max.ints))\n  p <- p + ggplot2::scale_x_discrete(limits=c(1:nr_slices))\n  p <- p  + ggplot2::xlab(\"slice number\")\n  p <- p  + ggplot2::ylab(\"theoretical MW (log)\")\n  p <- p + ggplot2::geom_line(data=plot_fit_data, ggplot2::aes(x=slice, y=mass), color=\"red\", size=1.5)\n\n  p\n}\n\n",
+    "created" : 1526376577248.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2446300707",
+    "id" : "A88F1420",
+    "lastKnownWriteTime" : 1526397227,
+    "last_content_update" : 1526397227156,
+    "path" : "~/Work/PAF/projects/pumba/code/pumbaR/R/create-plots.R",
+    "project_path" : "R/create-plots.R",
+    "properties" : {
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
