@@ -13,7 +13,7 @@ get_intensities(pg)
 Extract the Intensity.H values and put slice numbers as the column names.
 }
 \examples{
-proteinGroups_path <- "/Users/admin/Work/PAF/projects/SliceSILAC/latest/data/Conde_9508/proteinGroups.txt"
+proteinGroups_path <- proteinGroups_path <- system.file("extdata", "Conde_9508_sub.txt", package = "pumbaR")
 pg <- load_MQ(proteinGroups_path)
 ints <- get_intensities(pg)
 }

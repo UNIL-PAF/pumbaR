@@ -27,7 +27,7 @@
 #'
 #' @param pg ProteinGroups data.frame.
 #' @examples
-#' proteinGroups_path <- "/Users/admin/Work/PAF/projects/SliceSILAC/latest/data/Conde_9508/proteinGroups.txt"
+#' proteinGroups_path <- proteinGroups_path <- system.file("extdata", "Conde_9508_sub.txt", package = "pumbaR")
 #' pg <- load_MQ(proteinGroups_path)
 #' mass_fit <- filter_and_fit(pg)
 #' plot_fit(pg, mass_fit)

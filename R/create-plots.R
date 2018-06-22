@@ -6,8 +6,7 @@
 #'
 #' @param pg ProteinGroups data.frame.
 #' @examples
-#' proteinGroups_path <- "/Users/admin/Work/PAF/projects/SliceSILAC/latest/data/Conde_9508/proteinGroups.txt"
-#' proteinGroups_path <- "tests/testthat/Conde_9508_sub.txt"
+#' proteinGroups_path <- proteinGroups_path <- system.file("extdata", "Conde_9508_sub.txt", package = "pumbaR")
 #' pg <- load_MQ(proteinGroups_path)
 #' print(plot_MQ(pg))
 plot_MQ <- function(pg){
@@ -18,16 +17,13 @@ plot_MQ <- function(pg){
   ints.long <- reshape2::melt(ints.weight, id="mol.weight")
   ints.flt <- ints.long[ints.long$value > 0 & ! is.na(ints.long$value),]
   max.ints <- max(ints.flt$value)
-  min.ints <- min(ints.flt$value)
-
+  mn.ints <- min(ints.flt$value)
 
   # create a ggplot
   p <- ggplot2::ggplot(data=ints.flt, ggplot2::aes(x=variable, y=mol.weight, colour=value))
   p <- p  + ggplot2::geom_point(position="jitter", alpha=0.5)
   p <- p  + ggplot2::scale_colour_gradient2("Intensity (log)", trans="log", limits=c(min.ints, max.ints))
   p <- p  + ggplot2::xlab("slice number") + ggplot2::ylab("theoretical MW (log)")
-  #p <- p  + coord_cartesian(xlim = c(1, nr.slices))
-  #+ scale_y_continuous(limits=xlim.mass)
 
   p
 }

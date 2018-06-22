@@ -28,6 +28,8 @@ test_that("Low density entries are filtered", {
 
 test_that("Curve is fitted", {
   mass_fit <- fit_curve(pg)
-  expect_equal(mass_fit$coefficients[[1]], 2.807391)
+  test_tol <- 1e-06
+  res_diff <- abs(mass_fit$coefficients[[1]] - 2.807391)
+  expect_true(res_diff < test_tol)
 })
 
