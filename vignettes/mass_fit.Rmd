@@ -1,0 +1,29 @@
+---
+title: "Fit a curve to theoretical masses of peptides."
+author: "Roman Mylonas"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Prerequisites:
+You will have to install *PAFcontaminants* from GitHub:
+	
+	library(devtools)
+	install_github("UNIL-PAF/PAFcontaminants", build_vignettes = TRUE)
+
+
+MaxQuant provides us with a file (*proteinGroups.txt*) which contains information about the theoretical masses of proteins and how abbundant peptides from those proteins are found in slices from one dimensional gels. This information can be used to compute a approximation of which masses correspond to each slice.
+
+	# First the data is loaded:
+	pg_path <- "proteinGroups.txt"
+	pg <- load_MQ(pg_path)
+
+	# The data is filtered and masses are fitted to the slices
+	mass_fit <- filter_and_fit(pg)
+
+	# Generate a plot showing the final mass fit:
+	plot_fit(pg, mass_fit)
