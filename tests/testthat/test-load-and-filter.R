@@ -8,6 +8,13 @@ test_that("load_MQ filters correctly", {
   expect_equal(ncol(pg), 56)
 })
 
+test_that("load_MQ filters correctly second file", {
+  proteinGroups_path <- "Conde_9508_sub_2.txt"
+  pg <- load_MQ(proteinGroups_path)
+
+  expect_equal(nrow(pg), 472)
+  expect_equal(ncol(pg), 56)
+})
 
 
 

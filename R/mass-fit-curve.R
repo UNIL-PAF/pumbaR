@@ -26,15 +26,17 @@
 #' Filter the data and apply a fit on it.
 #'
 #' @param pg ProteinGroups data.frame.
+#' @param repeated_entries_threshold Remove entries which are repeated in more slices then the threshold (%).
+#' @param weak_intensity_threshold Remove entries which have an intensity below the threshold (%).
 #' @examples
-#' proteinGroups_path <- proteinGroups_path <- system.file("extdata", "Conde_9508_sub.txt", package = "pumbaR")
+#' proteinGroups_path <- proteinGroups_path <- system.file("extdata", "Conde_9508_sub_2.txt", package = "pumbaR")
 #' pg <- load_MQ(proteinGroups_path)
 #' mass_fit <- filter_and_fit(pg)
 #' plot_fit(pg, mass_fit)
 #' @export
 filter_and_fit <- function(pg){
-  pg <- filter_repeated_entries(pg)
-  pg <- filter_weak_intensity(pg)
+  pg <- filter_repeated_entries(pg, repeated_entries_threshold)
+  pg <- filter_weak_intensity(pg, weak_intensity_threshold)
   pg <- filter_low_densities(pg)
   fit_curve(pg)
 }
