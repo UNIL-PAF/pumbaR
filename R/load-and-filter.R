@@ -38,6 +38,7 @@ load_MQ <- function(proteinGroups_path){
 #' proteinGroups_path <- proteinGroups_path <- system.file("extdata", "Conde_9508_sub.txt", package = "pumbaR")
 #' pg <- load_MQ(proteinGroups_path)
 #' ints <- get_intensities(pg)
+#' @export
 get_intensities <- function(pg){
   # we extract the Intensity.H columns
   col_ids <- grep(int_column_pattern, colnames(pg))
