@@ -10,5 +10,6 @@ filter_repeated_entries(pg, rep_threshold = 0.3)
 \item{rep_threshold}{Max percentage of appearance. Default is 0.3.}
 }
 \description{
-Remove proteins which were found in too many slices. Those are very usually contaminants.
+Remove proteins which were found in too many slices. Those are very usually
+contaminants.
 }

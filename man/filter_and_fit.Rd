@@ -9,16 +9,17 @@ filter_and_fit(pg)
 \arguments{
 \item{pg}{ProteinGroups data.frame.}
 
-\item{repeated_entries_threshold}{Remove entries which are repeated in more slices then the threshold (%).}
+\item{repeated_entries_threshold}{Remove entries which are repeated in more
+slices then the threshold.}
 
-\item{weak_intensity_threshold}{Remove entries which have an intensity below the threshold (%).}
+\item{weak_intensity_threshold}{Remove entries which have an intensity below
+the threshold.}
 }
 \description{
 Filter the data and apply a fit on it.
 }
 \examples{
-proteinGroups_path <-
-system.file("extdata", "Conde_9508_sub_2.txt", package = "pumbaR")
+proteinGroups_path <- system.file("extdata", "Conde_9508_sub_2.txt", package = "pumbaR")
 pg <- load_MQ(proteinGroups_path)
 mass_fit <- filter_and_fit(pg)
 plot_fit(pg, mass_fit)
