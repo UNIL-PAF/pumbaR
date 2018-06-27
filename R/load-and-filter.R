@@ -9,7 +9,8 @@ int_column_pattern <- "Intensity\\.H\\."
 #'
 #' @param proteinGroups_path Path to proteinGroups.txt
 #' @examples
-#' proteinGroups_path <- proteinGroups_path <- system.file("extdata", "Conde_9508_sub_2.txt", package = "pumbaR")
+#' proteinGroups_path <-
+#' system.file("extdata", "Conde_9508_sub_2.txt", package = "pumbaR")
 #' pg <- load_MQ(proteinGroups_path)
 #' @export
 load_MQ <- function(proteinGroups_path){
@@ -35,7 +36,8 @@ load_MQ <- function(proteinGroups_path){
 #'
 #' @param pg ProteinGroups data.frame.
 #' @examples
-#' proteinGroups_path <- proteinGroups_path <- system.file("extdata", "Conde_9508_sub.txt", package = "pumbaR")
+#' proteinGroups_path <-
+#' system.file("extdata", "Conde_9508_sub.txt", package = "pumbaR")
 #' pg <- load_MQ(proteinGroups_path)
 #' ints <- get_intensities(pg)
 #' @export

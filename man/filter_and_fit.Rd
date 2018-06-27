@@ -17,7 +17,8 @@ filter_and_fit(pg)
 Filter the data and apply a fit on it.
 }
 \examples{
-proteinGroups_path <- proteinGroups_path <- system.file("extdata", "Conde_9508_sub_2.txt", package = "pumbaR")
+proteinGroups_path <-
+system.file("extdata", "Conde_9508_sub_2.txt", package = "pumbaR")
 pg <- load_MQ(proteinGroups_path)
 mass_fit <- filter_and_fit(pg)
 plot_fit(pg, mass_fit)

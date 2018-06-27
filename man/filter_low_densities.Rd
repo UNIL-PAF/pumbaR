@@ -7,9 +7,11 @@
 filter_low_densities(pg, min_nr_threshold = 10, step_nr = 500)
 }
 \arguments{
+\item{pg}{MaxQuant ProteinGroup data.}
+
 \item{min_nr_threshold}{Min number of entries which should be found in a slice. Default is 10.}
 
-\item{step_nr}{Number of steps for the theoretical mass. Default is 100.}
+\item{step_nr}{Number of steps for the theoretical mass. Default is 500.}
 }
 \description{
 Remove entries in regions with low density.

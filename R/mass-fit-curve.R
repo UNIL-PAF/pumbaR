@@ -29,7 +29,8 @@
 #' @param repeated_entries_threshold Remove entries which are repeated in more slices then the threshold (%).
 #' @param weak_intensity_threshold Remove entries which have an intensity below the threshold (%).
 #' @examples
-#' proteinGroups_path <- proteinGroups_path <- system.file("extdata", "Conde_9508_sub_2.txt", package = "pumbaR")
+#' proteinGroups_path <-
+#' system.file("extdata", "Conde_9508_sub_2.txt", package = "pumbaR")
 #' pg <- load_MQ(proteinGroups_path)
 #' mass_fit <- filter_and_fit(pg)
 #' plot_fit(pg, mass_fit)
@@ -78,8 +79,9 @@ filter_repeated_entries <- function(pg, rep_threshold = 0.3){
 #'
 #' Remove entries in regions with low density.
 #'
+#' @param pg MaxQuant ProteinGroup data.
 #' @param min_nr_threshold Min number of entries which should be found in a slice. Default is 10.
-#' @param step_nr Number of steps for the theoretical mass. Default is 100.
+#' @param step_nr Number of steps for the theoretical mass. Default is 500.
 filter_low_densities <- function(pg, min_nr_threshold = 10, step_nr = 500){
 
   # get the slices
@@ -126,6 +128,7 @@ filter_low_densities <- function(pg, min_nr_threshold = 10, step_nr = 500){
 #'
 #' Remove entries with a weak intensity.
 #'
+#' @param pg MaxQuant ProteinGroup data.
 #' @param rep_threshold Max percentage of appearance. Default is 0.3.
 filter_weak_intensity <- function(pg, int_threshold_percent = 0.5){
   # work with a logarithmic scale
