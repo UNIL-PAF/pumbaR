@@ -13,7 +13,8 @@ plot_MQ(pg)
 plot the intensities
 }
 \examples{
-proteinGroups_path <- proteinGroups_path <- system.file("extdata", "Conde_9508_sub.txt", package = "pumbaR")
+proteinGroups_path <-
+system.file("extdata", "Conde_9508_sub.txt", package = "pumbaR")
 pg <- load_MQ(proteinGroups_path)
-print(plot_MQ(pg))
+plot_MQ(pg)
 }
