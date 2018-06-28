@@ -9,6 +9,7 @@
 #' proteinGroups_path <- proteinGroups_path <- system.file("extdata", "Conde_9508_sub.txt", package = "pumbaR")
 #' pg <- load_MQ(proteinGroups_path)
 #' print(plot_MQ(pg))
+#' @export
 plot_MQ <- function(pg){
 
   # get the intensities from the proteinGroups
@@ -35,6 +36,7 @@ plot_MQ <- function(pg){
 #'
 #' @param pg ProteinGroups data.frame.
 #' @param mass_fit Mass-slice fitting function
+#' @export
 plot_fit <- function(pg, mass_fit){
 
   # get the intensities from the proteinGroups
@@ -47,7 +49,7 @@ plot_fit <- function(pg, mass_fit){
 
   # the data to show the fitting curve
   plot_fit_function <- function(x){
-    y <- predict(mass_fit, data.frame(variable=x))
+    y <- stats::predict(mass_fit, data.frame(variable=x))
     return(y[[1]])
   }
 
