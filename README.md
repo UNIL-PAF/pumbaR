@@ -1,4 +1,7 @@
-# pumbaR
+[![Build Status](https://travis-ci.org/UNIL-PAF/pumbaR.svg?branch=master)](https://travis-ci.org/UNIL-PAF/pumbaR)
+
+# pumbaR 
+
 MaxQuant provides us with a file *proteinGroups.txt* which contains information about the theoretical masses of proteins and how abbundant peptides from those proteins are found in slices from one dimensional gels. This information can be used to compute a approximation of which masses correspond to each slice.
 
 ## Installation
