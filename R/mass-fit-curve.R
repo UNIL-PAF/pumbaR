@@ -26,20 +26,17 @@
 #' Filter the data and apply a fit on it.
 #'
 #' @param pg ProteinGroups data.frame.
-#' @param repeated_entries_threshold Remove entries which are repeated in more
-#'   slices then the threshold.
-#' @param weak_intensity_threshold Remove entries which have an intensity below
-#'   the threshold.
+#' @param low_density_threshold Remove entries from regions with few data points (default is 10).
 #' @examples
 #' proteinGroups_path <- system.file("extdata", "Conde_9508_sub_2.txt", package = "pumbaR")
 #' pg <- load_MQ(proteinGroups_path)
-#' mass_fit <- filter_and_fit(pg)
+#' mass_fit <- filter_and_fit(pg, low_density_threshold = 2)
 #' plot_fit(pg, mass_fit)
 #' @export
-filter_and_fit <- function(pg){
-  pg <- filter_repeated_entries(pg, repeated_entries_threshold)
-  pg <- filter_weak_intensity(pg, weak_intensity_threshold)
-  pg <- filter_low_densities(pg)
+filter_and_fit <- function(pg, low_density_threshold = 10){
+  pg <- filter_repeated_entries(pg)
+  pg <- filter_weak_intensity(pg)
+  pg <- filter_low_densities(pg, min_nr_threshold = low_density_threshold)
   fit_curve(pg)
 }
 
@@ -57,7 +54,7 @@ fit_curve <- function(pg){
   ints.flt <- ints.long[ints.long$value > 0 & ! is.na(ints.long$value),]
 
   ints.flt$variable <- as.numeric(ints.flt$variable)
-  y.lm <- lm(data=ints.flt, formula = mol.weight ~ poly(variable,3, raw=TRUE), weight=value)
+  y.lm <- stats::lm(data = ints.flt, formula = mol.weight ~ poly(variable, 3, raw = TRUE))
 
   y.lm
 }
@@ -67,6 +64,7 @@ fit_curve <- function(pg){
 #' Remove proteins which were found in too many slices. Those are very usually
 #' contaminants.
 #'
+#' @param pg MaxQuant ProteinGroup data.
 #' @param rep_threshold Max percentage of appearance. Default is 0.3.
 filter_repeated_entries <- function(pg, rep_threshold = 0.3){
   ints <- get_intensities(pg)
@@ -132,7 +130,7 @@ filter_low_densities <- function(pg, min_nr_threshold = 10, step_nr = 500){
 #' Remove entries with a weak intensity.
 #'
 #' @param pg MaxQuant ProteinGroup data.
-#' @param rep_threshold Max percentage of appearance. Default is 0.3.
+#' @param int_threshold_percent Max percentage of appearance. Default is 0.3.
 filter_weak_intensity <- function(pg, int_threshold_percent = 0.5){
   # work with a logarithmic scale
   ints <- get_intensities(pg)

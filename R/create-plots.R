@@ -21,9 +21,10 @@ plot_MQ <- function(pg){
 
   # create a ggplot
   p <- ggplot2::ggplot(data=ints.flt, ggplot2::aes(x=variable, y=mol.weight, colour=value))
-  p <- p  + ggplot2::geom_point(position="jitter", alpha=0.5)
+  p <- p  + ggplot2::geom_point(position="jitter", alpha=0.2)
   p <- p  + ggplot2::scale_colour_gradient2("Intensity (log)", trans="log", limits=c(min.ints, max.ints))
   p <- p  + ggplot2::xlab("slice number") + ggplot2::ylab("theoretical MW (log)")
+  p <- p + ggplot2::theme_bw()
 
   p
 }
@@ -56,12 +57,13 @@ plot_fit <- function(pg, mass_fit){
 
   # create a ggplot
   p <- ggplot2::ggplot(data=ints.flt, ggplot2::aes(x=variable, y=mol.weight, colour=value))
-  p <- p  + ggplot2::geom_point(position="jitter", alpha=0.5)
+  p <- p  + ggplot2::geom_point(position="jitter", alpha=0.2)
   p <- p  + ggplot2::scale_colour_gradient2("Intensity (log)", trans="log", limits=c(min.ints, max.ints))
   p <- p + ggplot2::scale_x_discrete(limits=c(1:nr_slices))
   p <- p  + ggplot2::xlab("slice number")
   p <- p  + ggplot2::ylab("theoretical MW (log)")
   p <- p + ggplot2::geom_line(data=plot_fit_data, ggplot2::aes(x=slice, y=mass), color="red", size=1.5)
+  p <- p + ggplot2::theme_bw()
 
   p
 }

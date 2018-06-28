@@ -29,7 +29,16 @@ test_that("Low density entries are filtered", {
 test_that("Curve is fitted", {
   mass_fit <- fit_curve(pg)
   test_tol <- 1e-06
-  res_diff <- abs(mass_fit$coefficients[[1]] - 2.807391)
+  res_diff <- abs(mass_fit$coefficients[[1]] - 1.765073)
+  expect_true(res_diff < test_tol)
+})
+
+test_that("Filters and fits", {
+  proteinGroups_path_2 <- "Conde_9508_sub_2.txt"
+  pg_2 <- load_MQ(proteinGroups_path_2)
+  mass_fit <- filter_and_fit(pg_2, low_density_threshold = 2)
+  test_tol <- 1e-06
+  res_diff <- abs(mass_fit$coefficients[[1]] - 2.973931)
   expect_true(res_diff < test_tol)
 })
 

@@ -7,6 +7,8 @@
 filter_repeated_entries(pg, rep_threshold = 0.3)
 }
 \arguments{
+\item{pg}{MaxQuant ProteinGroup data.}
+
 \item{rep_threshold}{Max percentage of appearance. Default is 0.3.}
 }
 \description{

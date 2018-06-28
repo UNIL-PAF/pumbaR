@@ -9,7 +9,7 @@ filter_weak_intensity(pg, int_threshold_percent = 0.5)
 \arguments{
 \item{pg}{MaxQuant ProteinGroup data.}
 
-\item{rep_threshold}{Max percentage of appearance. Default is 0.3.}
+\item{int_threshold_percent}{Max percentage of appearance. Default is 0.3.}
 }
 \description{
 Remove entries with a weak intensity.

@@ -4,16 +4,12 @@
 \alias{filter_and_fit}
 \title{Filter_and_fit}
 \usage{
-filter_and_fit(pg)
+filter_and_fit(pg, low_density_threshold = 10)
 }
 \arguments{
 \item{pg}{ProteinGroups data.frame.}
 
-\item{repeated_entries_threshold}{Remove entries which are repeated in more
-slices then the threshold.}
-
-\item{weak_intensity_threshold}{Remove entries which have an intensity below
-the threshold.}
+\item{low_density_threshold}{Remove entries from regions with few data points (default is 10).}
 }
 \description{
 Filter the data and apply a fit on it.
@@ -21,6 +17,6 @@ Filter the data and apply a fit on it.
 \examples{
 proteinGroups_path <- system.file("extdata", "Conde_9508_sub_2.txt", package = "pumbaR")
 pg <- load_MQ(proteinGroups_path)
-mass_fit <- filter_and_fit(pg)
+mass_fit <- filter_and_fit(pg, low_density_threshold = 2)
 plot_fit(pg, mass_fit)
 }

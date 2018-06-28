@@ -16,7 +16,7 @@ int_column_pattern <- "Intensity\\.H\\."
 load_MQ <- function(proteinGroups_path){
 
   # read proteinGroups.txt
-  pg <- read.table(proteinGroups_path, quote="\"", row.names=NULL,
+  pg <- utils::read.table(proteinGroups_path, quote="\"", row.names=NULL,
              header=TRUE, sep="\t", fill=TRUE, na.strings=c("Non Num\303\251rique"))
 
   # remove contaminants and keep only columns of interest
