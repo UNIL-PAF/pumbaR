@@ -3,5 +3,6 @@
 export(filter_and_fit)
 export(get_intensities)
 export(load_MQ)
+export(merge_proteins)
 export(plot_MQ)
 export(plot_fit)

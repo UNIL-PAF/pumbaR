@@ -60,7 +60,7 @@ get_intensities <- function(pg){
 #' @param col_names Column names.
 get_slice_numbers <- function(col_names){
   col_names_flt <- grep(int_column_pattern, col_names, value=TRUE)
-  match_pattern <- "Intensity[\\.|A-Z|a-z]+"
+  match_pattern <- "Intensity[\\.|A-Z|a-z|_]+"
   as.numeric(sub(match_pattern, "", col_names_flt, perl=TRUE))
 }
 
