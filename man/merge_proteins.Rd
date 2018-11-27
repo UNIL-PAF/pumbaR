@@ -17,7 +17,6 @@ merge_proteins(data, cut_size = 100, loess_span = 0.05)
 Cut every slice into tiny subslices.
 }
 \examples{
-
 data <- list()
 data[[1]] <- list()
 data[[1]][['mass_fit_params']] <- c(2.92541101792906,-0.0856835305957989,0.00229499350478187,-2.85888515674011e-05)
