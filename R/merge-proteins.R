@@ -11,6 +11,7 @@
 #' mass_fit_params <- c(2.90230588635708,-0.0990513683718742,0.00309367801794186,-4.05829976900451e-05)
 #' ints <- runif(42,0,1)
 #' extr_ints <- extract_ints(ints, mass_fit_params)
+#' @export
 extract_ints <- function(ints, mass_fit_params, cut_size = 100){
 
   fit_func <- function(x) { mass_fit_params[1] + mass_fit_params[2] * x + mass_fit_params[3] * x^2 + mass_fit_params[4] * x^3 }
