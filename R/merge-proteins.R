@@ -55,19 +55,25 @@ sum_slides <- function(extracted_data){
     limit_left <- ref_mass - dist_left/2
     limit_right <- ref_mass + dist_right/2
 
-    # look for entries within this border in the other samples
-    sample_ints <- lapply(2:nr_samples, function(idx){
-      sample_data <- extracted_data[[idx]]
-      sample_slices_ok <- which(sample_data$mol_mass >= limit_left & sample_data$mol_mass < limit_right)
-      if(length(sample_slices_ok)) {
-        sample_data$ints[sample_slices_ok]
-      }else{
-        0
-      }
-    })
+    res <- ref$ints[i]
 
-    # give back the summed ints
-    sum(unlist(sample_ints)) + ref$ints[i]
+    if(nr_samples > 1){
+      # look for entries within this border in the other samples
+      sample_ints <- lapply(2:nr_samples, function(idx){
+        sample_data <- extracted_data[[idx]]
+        sample_slices_ok <- which(sample_data$mol_mass >= limit_left & sample_data$mol_mass < limit_right)
+        if(length(sample_slices_ok)) {
+          sample_data$ints[sample_slices_ok]
+        }else{
+          0
+        }
+      })
+
+      # give back the summed ints
+      res <- sum(unlist(sample_ints)) + res
+    }
+
+    res
   })
 
   # construct the data.frame with the results

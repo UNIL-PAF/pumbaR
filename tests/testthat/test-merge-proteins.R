@@ -33,3 +33,16 @@ test_that("Dimensions are correct", {
 test_that("Intensity max is correct", {
   expect_equal(max(merged_protein$y), 8712848594)
 })
+
+data_2 <- list()
+data_2[[1]] <- data[[1]]
+merged_protein_2 <- merge_proteins(data_2, cut_size=100, loess_span=0.05)
+
+test_that("Data with only one sample works", {
+  expect_equal(dim(merged_protein_2), c(4700, 2))
+})
+
+test_that("Data with only one sample is correct", {
+  expect_equal(max(merged_protein_2$y), 8996897187)
+})
+
