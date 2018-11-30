@@ -44,3 +44,23 @@ get_normalized_table <- function(pg){
   norm_pg
 }
 
+
+#' Get max normalized intensity
+#'
+#' Gives back the maximum normalized intensity.
+#'
+#' @param norm_pg normalized ProteinGroups data.frame.
+#' @examples
+#' proteinGroups_path <-
+#' system.file("extdata", "Conde_9508_sub.txt", package = "pumbaR")
+#' pg <- load_MQ(proteinGroups_path)
+#' norm_pg <- get_normalized_table(pg)
+#' max_norm_int <- get_max_norm_int(norm_pg)
+#' @export
+get_max_norm_int <- function(norm_pg){
+  int_ids <- grep("Intensity.Norm.", colnames(norm_pg))
+  ints <- norm_pg[,int_ids]
+
+  max_int <- max(unlist(lapply(ints, function(x){max(as.numeric(x))})))
+  return (max_int)
+}

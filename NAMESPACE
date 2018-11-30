@@ -3,6 +3,7 @@
 export(extract_ints)
 export(filter_and_fit)
 export(get_intensities)
+export(get_max_norm_int)
 export(get_normalized_table)
 export(get_slice_numbers)
 export(load_MQ)

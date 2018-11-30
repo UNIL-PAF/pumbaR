@@ -8,7 +8,7 @@ test_that("Normalize intensities", {
   norm_ints <- normalize_intensities(ints)
 
   expect_equal(dim(ints), dim(norm_ints))
-  expect_equal(ints[1,1], norm_ints[1,1])
+  expect_false(ints[1,37] == norm_ints[1,37])
 })
 
 test_that("Get normalized table", {
@@ -17,4 +17,11 @@ test_that("Get normalized table", {
   expect_equal(nrow(norm_pg), 474)
   expect_equal(ncol(norm_pg), 48)
   expect_equal(colnames(norm_pg)[4], "Intensity.Norm.1")
+})
+
+test_that("Get maximal normalized intensity", {
+  norm_pg <- get_normalized_table(pg)
+
+  max_norm_int <- get_max_norm_int(norm_pg)
+  expect_equal(max_norm_int, 0.1116033)
 })
