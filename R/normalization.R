@@ -59,6 +59,13 @@ get_normalized_table <- function(pg){
 #' @export
 get_max_norm_int <- function(norm_pg){
   int_ids <- grep("Intensity.Norm.", colnames(norm_pg))
+
+  # return NA with a warning if there are no columns found
+  if(length(int_ids) < 1){
+    warning("Could not find normalized intensities.")
+    return (NA)
+  }
+
   ints <- norm_pg[,int_ids]
 
   max_int <- max(unlist(lapply(ints, function(x){max(as.numeric(x))})))
