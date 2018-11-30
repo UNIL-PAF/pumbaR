@@ -12,3 +12,9 @@ get_slice_numbers(col_names)
 \description{
 Extract the slice numbers from the column names
 }
+\examples{
+proteinGroups_path <-
+system.file("extdata", "Conde_9508_sub.txt", package = "pumbaR")
+pg <- load_MQ(proteinGroups_path)
+get_slice_numbers(colnames(pq))
+}
