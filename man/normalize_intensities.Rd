@@ -7,7 +7,7 @@
 normalize_intensities(ints)
 }
 \arguments{
-\item{pg}{ProteinGroups data.frame.}
+\item{ints}{The slice intensities from a proteinGroups.txt file.}
 }
 \description{
 Normalize intensities by dividing every entry by the total sum of

@@ -16,5 +16,5 @@ Extract the slice numbers from the column names
 proteinGroups_path <-
 system.file("extdata", "Conde_9508_sub.txt", package = "pumbaR")
 pg <- load_MQ(proteinGroups_path)
-get_slice_numbers(pq)
+get_slice_numbers(pg)
 }
