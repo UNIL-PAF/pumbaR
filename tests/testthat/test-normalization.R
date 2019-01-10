@@ -15,8 +15,8 @@ test_that("Get normalized table", {
   norm_pg <- get_normalized_table(pg)
 
   expect_equal(nrow(norm_pg), 474)
-  expect_equal(ncol(norm_pg), 48)
-  expect_equal(colnames(norm_pg)[4], "Intensity.Norm.1")
+  expect_equal(ncol(norm_pg), 49)
+  expect_equal(colnames(norm_pg)[5], "Intensity.Norm.1")
 })
 
 test_that("Get maximal normalized intensity", {
