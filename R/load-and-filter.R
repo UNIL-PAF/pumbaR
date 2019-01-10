@@ -54,9 +54,9 @@ get_intensities <- function(pg){
 
 #' Get the slice numbers
 #'
-#' Extract the slice numbers from the column names
+#' Extract the slice numbers from the proteinGroups dataframe.
 #'
-#' @param col_names Column names.
+#' @param pg ProteinGroups dataframe.
 #' @examples
 #' proteinGroups_path <-
 #' system.file("extdata", "Conde_9508_sub.txt", package = "pumbaR")

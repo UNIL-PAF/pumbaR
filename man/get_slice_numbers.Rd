@@ -7,10 +7,10 @@
 get_slice_numbers(pg)
 }
 \arguments{
-\item{col_names}{Column names.}
+\item{pg}{ProteinGroups dataframe.}
 }
 \description{
-Extract the slice numbers from the column names
+Extract the slice numbers from the proteinGroups dataframe.
 }
 \examples{
 proteinGroups_path <-
