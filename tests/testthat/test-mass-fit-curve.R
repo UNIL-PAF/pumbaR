@@ -37,7 +37,7 @@ test_that("Filters and fits", {
   proteinGroups_path_2 <- "Conde_9508_sub_2.txt"
   pg_2 <- load_MQ(proteinGroups_path_2)
   mass_fit <- filter_and_fit(pg_2, low_density_threshold = 2)
-  test_tol <- 1e-06
+  test_tol <- 1e-03
   #res_diff <- abs(mass_fit$coefficients[[1]] - 2.973931)
   res_diff <- abs(mass_fit$coefficients[[1]] - 2.763)
   expect_true(res_diff < test_tol)
