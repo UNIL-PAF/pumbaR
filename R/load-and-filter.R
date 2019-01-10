@@ -44,8 +44,7 @@ load_MQ <- function(proteinGroups_path){
 get_intensities <- function(pg){
   # we extract the Intensity.H columns
   col_ids <- grep(int_column_pattern, colnames(pg))
-  col_names <- colnames(pg)[col_ids]
-  slice_nrs <- get_slice_numbers(col_names)
+  slice_nrs <- get_slice_numbers(pg)
 
   # create a data.frame with the intensities
   res <- pg[, col_ids]
@@ -62,9 +61,10 @@ get_intensities <- function(pg){
 #' proteinGroups_path <-
 #' system.file("extdata", "Conde_9508_sub.txt", package = "pumbaR")
 #' pg <- load_MQ(proteinGroups_path)
-#' get_slice_numbers(colnames(pq))
+#' get_slice_numbers(pg)
 #' @export
-get_slice_numbers <- function(col_names){
+get_slice_numbers <- function(pg){
+  col_names <- colnames(pg)
   col_names_flt <- grep(int_column_pattern, col_names, value=TRUE)
   match_pattern <- "Intensity[\\.|A-Z|a-z|_]+"
   as.numeric(sub(match_pattern, "", col_names_flt, perl=TRUE))

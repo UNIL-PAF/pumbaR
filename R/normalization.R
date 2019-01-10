@@ -6,7 +6,7 @@
 #' intensities over all slices and proteins. Gives back a data-frame
 #' with normalized intensities.
 #'
-#' @param pg ProteinGroups data.frame.
+#' @param ints The slice intensities from a proteinGroups.txt file.
 #' @examples
 #' proteinGroups_path <-
 #' system.file("extdata", "Conde_9508_sub.txt", package = "pumbaR")

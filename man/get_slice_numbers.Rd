@@ -4,7 +4,7 @@
 \alias{get_slice_numbers}
 \title{Get the slice numbers}
 \usage{
-get_slice_numbers(col_names)
+get_slice_numbers(pg)
 }
 \arguments{
 \item{col_names}{Column names.}
@@ -16,5 +16,5 @@ Extract the slice numbers from the column names
 proteinGroups_path <-
 system.file("extdata", "Conde_9508_sub.txt", package = "pumbaR")
 pg <- load_MQ(proteinGroups_path)
-get_slice_numbers(colnames(pq))
+get_slice_numbers(pq)
 }
