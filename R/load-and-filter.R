@@ -22,7 +22,7 @@ load_MQ <- function(proteinGroups_path){
   # remove contaminants and keep only columns of interest
   is_contaminant <- PAFcontaminants::contaminants_MQ(pg)
   keep_columns_names <- c("Majority.protein.IDs", "Gene.names", "Fasta.headers", "Peptides", "Score", "Only.identified.by.site",
-                          "Reverse", "Potential.contaminant", "id", "Peptide.IDs", "Mol..weight..kDa.")
+                          "Reverse", "Potential.contaminant", "id", "Peptide.IDs", "Peptide.is.razor", "Mol..weight..kDa.")
   keep_columns <- colnames(pg) %in% keep_columns_names
   keep_columns[grep("Intensity\\.H\\.", colnames(pg))] <- TRUE
   pg_flt <- pg[! is_contaminant, keep_columns]

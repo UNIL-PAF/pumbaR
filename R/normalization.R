@@ -36,7 +36,7 @@ get_normalized_table <- function(pg){
   norm_ints <- normalize_intensities(ints)
 
   # add information columns
-  info_cols <- c("Majority.protein.IDs", "Gene.names", "Mol..weight..kDa.", "Peptide.IDs")
+  info_cols <- c("Majority.protein.IDs", "Gene.names", "Mol..weight..kDa.", "Peptide.IDs", "Peptide.is.razor")
   norm_pg <- cbind(pg[,info_cols], norm_ints)
 
   # adapt the colnames
