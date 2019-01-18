@@ -10,7 +10,7 @@ int_column_pattern <- "Intensity\\.H\\."
 #' @param proteinGroups_path Path to proteinGroups.txt
 #' @examples
 #' proteinGroups_path <-
-#' system.file("extdata", "Conde_9508_sub_2.txt", package = "pumbaR")
+#' system.file("extdata", "Conde_9508_sub.txt", package = "pumbaR")
 #' pg <- load_MQ(proteinGroups_path)
 #' @export
 load_MQ <- function(proteinGroups_path){

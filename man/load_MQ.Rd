@@ -14,6 +14,6 @@ Load the results and remove contaminants.
 }
 \examples{
 proteinGroups_path <-
-system.file("extdata", "Conde_9508_sub_2.txt", package = "pumbaR")
+system.file("extdata", "Conde_9508_sub.txt", package = "pumbaR")
 pg <- load_MQ(proteinGroups_path)
 }
