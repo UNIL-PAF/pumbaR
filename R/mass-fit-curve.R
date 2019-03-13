@@ -85,7 +85,7 @@ filter_repeated_entries <- function(pg, rep_threshold = 0.3){
 filter_low_densities <- function(pg, min_nr_threshold = 10, step_nr = 500){
 
   # get the slices
-  slices <- get_slice_numbers(colnames(pg))
+  slices <- get_slice_numbers(pg)
 
   # get the mol_weight range
   mol_weight <- pg$Mol..weight..kDa.

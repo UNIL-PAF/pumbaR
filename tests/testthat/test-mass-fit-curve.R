@@ -36,7 +36,7 @@ test_that("Curve is fitted", {
 test_that("Filters and fits", {
   mass_fit <- filter_and_fit(pg, low_density_threshold = 2)
   test_tol <- 1e-03
-  res_diff <- abs(mass_fit$coefficients[[1]] - 2.606492)
+  res_diff <- abs(mass_fit$coefficients[[1]] - 2.905583)
   expect_true(res_diff < test_tol)
 })
 
