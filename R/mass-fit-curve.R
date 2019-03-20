@@ -117,7 +117,7 @@ filter_low_densities <- function(pg, min_nr_threshold = 10, step_nr = 500){
 
   }
 
-  col_ids <- grep(int_column_pattern, colnames(pg))
+  col_ids <- get_intensity_columns(pg)
   pg[, col_ids] <- ints
   pg
 
@@ -144,7 +144,7 @@ filter_weak_intensity <- function(pg, int_threshold_percent = 0.5){
 
   # remove too weak points from pg
   too_weak <- ints < int_threshold
-  col_ids <- grep(int_column_pattern, colnames(pg))
+  col_ids <- get_intensity_columns(pg)
   pg[, col_ids][too_weak] <- 0
   pg
 }
