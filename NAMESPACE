@@ -2,6 +2,10 @@
 
 export(extract_ints)
 export(filter_and_fit)
+export(filter_low_densities)
+export(filter_repeated_entries)
+export(filter_weak_intensity)
+export(fit_curve)
 export(get_intensities)
 export(get_max_norm_int)
 export(get_normalized_table)

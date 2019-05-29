@@ -10,7 +10,7 @@ get_intensities(pg)
 \item{pg}{ProteinGroups data.frame.}
 }
 \description{
-Extract the Intensity.H values and put slice numbers as the column names.
+Extract the intensity values and put slice numbers as the column names.
 }
 \examples{
 proteinGroups_path <-

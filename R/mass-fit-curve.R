@@ -45,6 +45,7 @@ filter_and_fit <- function(pg, low_density_threshold = 10){
 #' Fit a polynomial curve to the given intensity data.
 #'
 #' @param pg MaxQuant ProteinGroup data.
+#' @export
 fit_curve <- function(pg){
   # get the intensities from the proteinGroups
   ints <- get_intensities(pg)
@@ -65,6 +66,7 @@ fit_curve <- function(pg){
 #'
 #' @param pg MaxQuant ProteinGroup data.
 #' @param rep_threshold Max percentage of appearance. Default is 0.3.
+#' @export
 filter_repeated_entries <- function(pg, rep_threshold = 0.3){
   ints <- get_intensities(pg)
   nr_slices <- ncol(ints)
@@ -82,6 +84,7 @@ filter_repeated_entries <- function(pg, rep_threshold = 0.3){
 #' @param min_nr_threshold Min number of entries which should be found in a
 #'   slice. Default is 10.
 #' @param step_nr Number of steps for the theoretical mass. Default is 500.
+#' @export
 filter_low_densities <- function(pg, min_nr_threshold = 10, step_nr = 500){
 
   # get the slices
@@ -130,6 +133,7 @@ filter_low_densities <- function(pg, min_nr_threshold = 10, step_nr = 500){
 #'
 #' @param pg MaxQuant ProteinGroup data.
 #' @param int_threshold_percent Max percentage of appearance. Default is 0.3.
+#' @export
 filter_weak_intensity <- function(pg, int_threshold_percent = 0.5){
   # work with a logarithmic scale
   ints <- get_intensities(pg)
