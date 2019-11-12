@@ -21,6 +21,14 @@ test_that("correct number of slices are extracted", {
   expect_equal(length(slice_numbers), 45)
 })
 
+test_that("slices are ignored", {
+  pg_2 <- load_MQ(proteinGroups_path, ignore_slices=c(24,25))
+  slice_numbers <- get_slice_numbers(pg_2)
+  expect_equal(sum(pg_2[(get_intensity_columns(pg_2)[c(24,25)])]), 0)
+  expect_equal(sum(pg_2[(get_intensity_columns(pg_2)[c(1)])]), 215960050)
+  expect_equal(length(slice_numbers), 45)
+})
+
 
 
 

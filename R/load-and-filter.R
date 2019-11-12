@@ -14,8 +14,7 @@ alt_int_column_pattern <- "Intensity\\."
 #' system.file("extdata", "Conde_9508_sub.txt", package = "pumbaR")
 #' pg <- load_MQ(proteinGroups_path)
 #' @export
-load_MQ <- function(proteinGroups_path){
-
+load_MQ <- function(proteinGroups_path, ignore_slices = NULL){
   # read proteinGroups.txt
   pg <- utils::read.table(proteinGroups_path, quote="\"", row.names=NULL,
              header=TRUE, sep="\t", fill=TRUE, na.strings=c("Non Num\303\251rique"))
@@ -29,6 +28,14 @@ load_MQ <- function(proteinGroups_path){
   keep_columns[get_intensity_columns(pg)] <- TRUE
 
   pg_flt <- pg[! is_contaminant, keep_columns]
+
+  # set values to 0 in case the corresponding slice is to ignored
+  if(length(ignore_slices > 0)){
+    int_cols <- get_intensity_columns(pg_flt)
+    for(ignore in ignore_slices){
+      pg_flt[int_cols[ignore]] <- 0
+    }
+  }
 
   pg_flt
 }

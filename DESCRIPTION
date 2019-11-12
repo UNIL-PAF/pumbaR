@@ -13,7 +13,7 @@ Imports: PAFcontaminants,
     ggplot2,
     stringr
 Remotes: UNIL-PAF/PAFcontaminants
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 Suggests: knitr,
     rmarkdown,
     testthat
