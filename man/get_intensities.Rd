@@ -4,7 +4,7 @@
 \alias{get_intensities}
 \title{Get intensities}
 \usage{
-get_intensities(pg)
+get_intensities(pg, sample_name = NULL)
 }
 \arguments{
 \item{pg}{ProteinGroups data.frame.}

@@ -4,7 +4,7 @@
 \alias{get_normalized_table}
 \title{Get normalize table}
 \usage{
-get_normalized_table(pg)
+get_normalized_table(pg, sample_name = NULL)
 }
 \arguments{
 \item{pg}{ProteinGroups data.frame.}

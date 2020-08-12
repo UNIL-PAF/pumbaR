@@ -4,7 +4,7 @@
 \alias{get_slice_numbers}
 \title{Get the slice numbers}
 \usage{
-get_slice_numbers(pg)
+get_slice_numbers(pg, sample_name = NULL)
 }
 \arguments{
 \item{pg}{ProteinGroups dataframe.}

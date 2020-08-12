@@ -4,7 +4,7 @@
 \alias{load_MQ}
 \title{Load and filter MaxQuant proteinGroups.txt}
 \usage{
-load_MQ(proteinGroups_path)
+load_MQ(proteinGroups_path, ignore_slices = NULL, sample_name = NULL)
 }
 \arguments{
 \item{proteinGroups_path}{Path to proteinGroups.txt}
