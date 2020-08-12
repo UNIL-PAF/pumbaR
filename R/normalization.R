@@ -31,8 +31,8 @@ normalize_intensities <- function(ints){
 #' pg <- load_MQ(proteinGroups_path)
 #' normalized_table <- get_normalized_table(pg)
 #' @export
-get_normalized_table <- function(pg){
-  ints <- get_intensities(pg)
+get_normalized_table <- function(pg, sample_name = NULL){
+  ints <- get_intensities(pg, sample_name)
   norm_ints <- normalize_intensities(ints)
 
   # add information columns

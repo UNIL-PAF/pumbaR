@@ -14,7 +14,7 @@ alt_int_column_pattern <- "Intensity\\."
 #' system.file("extdata", "Conde_9508_sub.txt", package = "pumbaR")
 #' pg <- load_MQ(proteinGroups_path)
 #' @export
-load_MQ <- function(proteinGroups_path, ignore_slices = NULL){
+load_MQ <- function(proteinGroups_path, ignore_slices = NULL, sample_name = NULL){
   # read proteinGroups.txt
   pg <- utils::read.table(proteinGroups_path, quote="\"", row.names=NULL,
              header=TRUE, sep="\t", fill=TRUE, na.strings=c("Non Num\303\251rique"))
@@ -25,18 +25,17 @@ load_MQ <- function(proteinGroups_path, ignore_slices = NULL){
                           "Reverse", "Potential.contaminant", "id", "Peptide.IDs", "Peptide.is.razor", "Mol..weight..kDa.")
   keep_columns <- colnames(pg) %in% keep_columns_names
 
-  keep_columns[get_intensity_columns(pg)] <- TRUE
+  keep_columns[get_intensity_columns(pg, sample_name)] <- TRUE
 
   pg_flt <- pg[! is_contaminant, keep_columns]
 
   # set values to 0 in case the corresponding slice is to ignored
   if(length(ignore_slices > 0)){
-    int_cols <- get_intensity_columns(pg_flt)
+    int_cols <- get_intensity_columns(pg_flt, sample_name)
     for(ignore in ignore_slices){
       pg_flt[int_cols[ignore]] <- 0
     }
   }
-
   pg_flt
 }
 
@@ -51,9 +50,9 @@ load_MQ <- function(proteinGroups_path, ignore_slices = NULL){
 #' pg <- load_MQ(proteinGroups_path)
 #' ints <- get_intensities(pg)
 #' @export
-get_intensities <- function(pg){
-  col_ids <- get_intensity_columns(pg)
-  slice_nrs <- get_slice_numbers(pg)
+get_intensities <- function(pg, sample_name = NULL){
+  col_ids <- get_intensity_columns(pg, sample_name)
+  slice_nrs <- get_slice_numbers(pg, sample_name)
 
   # create a data.frame with the intensities
   res <- pg[, col_ids]
@@ -66,7 +65,7 @@ get_intensities <- function(pg){
 #' Extract the Intensity.H or Intensity. columns
 #'
 #' @param pg ProteinGroups data.frame.
-get_intensity_columns <- function(pg){
+get_intensity_columns <- function(pg, sample_name = NULL){
   # we extract the Intensity.H columns
   col_ids <- grep(int_column_pattern, colnames(pg))
 
@@ -74,6 +73,13 @@ get_intensity_columns <- function(pg){
   if(length(col_ids) < 10){
     col_ids <- grep(alt_int_column_pattern, colnames(pg))
   }
+
+  # only the provided sample_name
+  if(! is.null(sample_name)){
+    flt_ids <- grep(sample_name, colnames(pg)[col_ids])
+    col_ids <- col_ids[flt_ids]
+  }
+
   col_ids
 }
 
@@ -88,7 +94,7 @@ get_intensity_columns <- function(pg){
 #' pg <- load_MQ(proteinGroups_path)
 #' get_slice_numbers(pg)
 #' @export
-get_slice_numbers <- function(pg){
+get_slice_numbers <- function(pg, sample_name = NULL){
   col_names <- colnames(pg)
   col_names_flt <- grep(int_column_pattern, col_names, value=TRUE)
 
@@ -96,6 +102,12 @@ get_slice_numbers <- function(pg){
   if(length(col_names_flt) < 10){
     col_names_flt <- grep(alt_int_column_pattern, col_names, value=TRUE)
   }
+
+  # only the provided sample_name
+  if(! is.null(sample_name)){
+    col_names_flt <- grep(sample_name, col_names_flt, value=TRUE)
+  }
+
   as.numeric(stringr::str_extract(col_names_flt, "[0-9]+$"))
 }
 

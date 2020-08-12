@@ -3,6 +3,9 @@ context("Load and filter MQ data")
 proteinGroups_path <- "Conde_9508_sub.txt"
 pg <- load_MQ(proteinGroups_path)
 
+proteinGroups_path_merged <- "HEK293_11971_11973_12019_sub.txt"
+pg_merged <- load_MQ(proteinGroups_path_merged, sample_name = "11971")
+
 test_that("load_MQ filters correctly", {
   expect_equal(nrow(pg), 404)
   expect_equal(ncol(pg), 57)
@@ -29,7 +32,10 @@ test_that("slices are ignored", {
   expect_equal(length(slice_numbers), 45)
 })
 
-
+test_that("load_MQ merged data correctly", {
+  expect_equal(nrow(pg_merged), 332)
+  expect_equal(ncol(pg_merged), 58)
+})
 
 
 
