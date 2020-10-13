@@ -15,7 +15,7 @@
 #' norm_ints <- normalize_intensities(ints)
 #' @export
 normalize_intensities <- function(ints){
-  total_sum <- sum(unlist(lapply(ints, function(x){sum(as.numeric(x))})))
+  total_sum <- get_correction_factor(ints)
   return (ints/total_sum)
 }
 
@@ -44,6 +44,22 @@ get_normalized_table <- function(pg, sample_name = NULL){
   norm_pg
 }
 
+#' Get correction factor
+#'
+#' Gives back the total sum of intensities over all slices and proteins.
+#' This correction factor is used for intensity normalisation.
+#'
+#' @param ints The slice intensities from a proteinGroups.txt file.
+#' @examples
+#' proteinGroups_path <-
+#' system.file("extdata", "Conde_9508_sub.txt", package = "pumbaR")
+#' pg <- load_MQ(proteinGroups_path)
+#' ints <- get_intensities(pg)
+#' corr_factor <- get_correction_factor(ints)
+#' @export
+get_correction_factor <- function(ints){
+  sum(unlist(lapply(ints, function(x){sum(as.numeric(x))})))
+}
 
 #' Get max normalized intensity
 #'
