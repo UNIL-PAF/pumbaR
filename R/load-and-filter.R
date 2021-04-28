@@ -23,10 +23,17 @@ load_MQ <- function(proteinGroups_path, ignore_slices = NULL, sample_name = NULL
   is_contaminant <- PAFcontaminants::contaminants_MQ(pg)
   keep_columns_names <- c("Majority.protein.IDs", "Gene.names", "Fasta.headers", "Peptides", "Score", "Only.identified.by.site",
                           "Reverse", "Potential.contaminant", "id", "Peptide.IDs", "Peptide.is.razor", "Mol..weight..kDa.")
-  keep_columns <- colnames(pg) %in% keep_columns_names
 
-  keep_columns[get_intensity_columns(pg, sample_name)] <- TRUE
+  keep_columns <- as.numeric(sapply(keep_columns_names, function(x){
+    grep(paste0("^", x, "$"), colnames(pg))
+    }))
 
+  # we sort the intensity_columns to make sure of their order
+  intensity_columns <- get_intensity_columns(pg, sample_name)
+  slice_numbers <- get_slice_numbers(pg, sample_name)
+  intensity_columns <- intensity_columns[order(slice_numbers)]
+
+  keep_columns <- c(keep_columns, intensity_columns)
   pg_flt <- pg[! is_contaminant, keep_columns]
 
   # set values to 0 in case the corresponding slice is to ignored
