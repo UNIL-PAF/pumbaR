@@ -1,7 +1,7 @@
 Package: pumbaR
 Type: Package
 Title: Parse MaxQuant data and compute theoretical molecular weights for every slice.
-Version: 0.5.0
+Version: 0.5.1
 Authors@R: person("Roman", "Mylonas", email = "roman.mylonas@unil.ch", role = c("aut", "cre"))
 Description: Use information from slices of one dimensional gels with subsequent mass
     spectrometry analysis to identify peptides.
