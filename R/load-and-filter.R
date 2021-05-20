@@ -45,7 +45,7 @@ load_MQ <- function(proteinGroups_path, ignore_slices = NULL, sample_name = NULL
   }
 
   # remove rows with only empty intensities
-  empty_row <- apply(pg[, intensity_columns], 1, function(x){all(x == 0)})
+  empty_row <- apply(pg_flt[, intensity_columns], 1, function(x){all(x == 0)})
   pg_flt <- pg_flt[! empty_row,]
 
   # keep only columns of interest
