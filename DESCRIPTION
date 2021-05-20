@@ -11,7 +11,8 @@ LazyData: true
 Imports: PAFcontaminants,
     reshape2,
     ggplot2,
-    stringr
+    stringr,
+    markdown
 Remotes: UNIL-PAF/PAFcontaminants
 RoxygenNote: 7.1.0
 Suggests: knitr,
