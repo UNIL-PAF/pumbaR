@@ -33,8 +33,12 @@ load_MQ <- function(proteinGroups_path, ignore_slices = NULL, sample_name = NULL
   slice_numbers <- get_slice_numbers(pg, sample_name)
   intensity_columns <- intensity_columns[order(slice_numbers)]
 
+  # remove rows with only empty intensities
+  empty_row <- apply(pg[, intensity_columns], 1, function(x){all(x == 0)})
+
+  # remove contaminants and only keep necessary columns
   keep_columns <- c(keep_columns, intensity_columns)
-  pg_flt <- pg[! is_contaminant, keep_columns]
+  pg_flt <- pg[! (is_contaminant | empty_row), keep_columns]
 
   # set values to 0 in case the corresponding slice is to ignored
   if(length(ignore_slices > 0)){
